@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>{{ data ? "Edit Employee" : "Add Employee" }}</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput placeholder="Name" [(ngModel)]="employee.name" />
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <input matInput placeholder="Email" [(ngModel)]="employee.email" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button
+    mat-button
+    color="primary"
+    [mat-dialog-close]="employee"
+    cdkFocusInitial
+  >
+    Save
+  </button>
+</div>
