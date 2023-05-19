@@ -3,7 +3,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { first, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,9 @@ export class EmployeeService {
   }
 
   createEmployee(employee: any): void {
-    this.employeeCollection.add(employee);
+    const id = this.firestore.createId();
+    const employeeWithId = { ...employee, id };
+    this.employeeCollection.doc(id).set(employeeWithId);
   }
 
   updateEmployee(employee: any): void {
@@ -33,5 +35,12 @@ export class EmployeeService {
 
   deleteEmployee(employeeId: string): void {
     this.employeeCollection.doc(employeeId).delete();
+  }
+
+  async checkEmailExists(email: string): Promise<boolean> {
+    const querySnapshot = await this.employeeCollection.ref
+      .where('email', '==', email)
+      .get();
+    return !querySnapshot.empty;
   }
 }

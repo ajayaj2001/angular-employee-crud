@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { EmployeeService } from '../employee.service';
+import { EmployeeService } from '../services/employee/employee.service';
 import { EmpDetailDialogComponent } from '../emp-detail-dialog/emp-detail-dialog.component';
 
 @Component({

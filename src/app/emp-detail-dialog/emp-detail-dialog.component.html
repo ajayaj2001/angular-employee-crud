@@ -1,21 +1,42 @@
-<h1 mat-dialog-title>{{ data ? "Edit Employee" : "Add Employee" }}</h1>
-<div mat-dialog-content>
-  <mat-form-field>
-    <input matInput placeholder="Name" [(ngModel)]="employee.name" />
-  </mat-form-field>
-  <br />
-  <mat-form-field>
-    <input matInput placeholder="Email" [(ngModel)]="employee.email" />
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onCancelClick()">Cancel</button>
-  <button
-    mat-button
-    color="primary"
-    [mat-dialog-close]="employee"
-    cdkFocusInitial
-  >
+<h2 mat-dialog-title>Add Employee</h2>
+<mat-dialog-content>
+  <form [formGroup]="employeeForm">
+    <mat-form-field>
+      <input matInput placeholder="Name" formControlName="name" />
+      <mat-error
+        *ngIf="
+          employeeForm.controls['name'].hasError('required') &&
+          employeeForm.controls['name'].touched
+        "
+        >Name is required</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email" />
+      <mat-error
+        *ngIf="
+          employeeForm.controls['email'].hasError('required') &&
+          employeeForm.controls['email'].touched
+        "
+        >Email is required</mat-error
+      >
+      <mat-error
+        *ngIf="
+          employeeForm.controls['email'].hasError('email') &&
+          employeeForm.controls['email'].touched
+        "
+        >Invalid email format</mat-error
+      >
+      <mat-error
+        *ngIf="employeeForm.controls['email'].hasError('emailAlreadyExist')"
+        >Email Already Exist</mat-error
+      >
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="saveEmployee()">
     Save
   </button>
-</div>
+</mat-dialog-actions>
