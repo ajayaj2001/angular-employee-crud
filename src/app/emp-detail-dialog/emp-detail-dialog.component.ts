@@ -6,7 +6,7 @@ import { EmployeeService } from '../services/employee/employee.service';
 @Component({
   selector: 'app-emp-detail-dialog',
   templateUrl: './emp-detail-dialog.component.html',
-  styleUrls: [],
+  styleUrls: ['./emp-detail-dialog.component.scss'],
 })
 export class EmpDetailDialogComponent {
   employeeForm: FormGroup;

@@ -6,6 +6,7 @@ import { EmpDetailDialogComponent } from '../emp-detail-dialog/emp-detail-dialog
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   employees: any[] = [];
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(EmpDetailDialogComponent, {
       width: '300px',
+      height: '320px',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
